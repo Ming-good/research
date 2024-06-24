@@ -2,7 +2,7 @@ package blockingTest;
 
 import java.util.concurrent.CompletableFuture;
 
-public class NonBlocking implements Process {
+public class AsyncNonBlocking<T> implements Process {
 
     @Override
     public void execution(int i) {
@@ -14,11 +14,11 @@ public class NonBlocking implements Process {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(1000);
-                System.out.println("논블로킹 TASK 실행 : "+input);
+                System.out.println("비동기 + 논블로킹 TASK 실행 : "+input);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return "논블로킹 TASK 결과물"+input;
+            return "비동기 + 논블로킹 TASK 결과물"+input;
         });
     }
 }

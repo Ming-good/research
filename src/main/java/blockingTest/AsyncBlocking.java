@@ -3,13 +3,13 @@ package blockingTest;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class Blocking implements Process {
+public class AsyncBlocking<T> implements Process {
 
     @Override
     public void execution(int i) throws ExecutionException, InterruptedException {
         FutureTask<String> futureTask = calculate(i);
         new Thread(futureTask).start();
-        System.out.println("갑툭튀"+i);
+        System.out.println("비동기 + 블로킹 "+i);
         System.out.println(futureTask.get());
     }
 
@@ -17,8 +17,8 @@ public class Blocking implements Process {
    public FutureTask<String> calculate(int input) {
         return  new FutureTask<>(() -> {
             Thread.sleep(1000);
-            System.out.println("블로킹 TASK 실행 : " + input);
-            return "블로킹 TASK 결과물" + input;
+            System.out.println("비동기 + 블로킹 TASK 실행 : " + input);
+            return "비동기 + 블로킹 TASK 결과물" + input;
         });
     }
 }
